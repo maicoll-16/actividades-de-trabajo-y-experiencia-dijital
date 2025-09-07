@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experiencia Digital Avanzada</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary: #6d28d9;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --dark: #1e293b;
+            --light: #f8fafc;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .modal {
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        
+        .modal-content {
+            transition: transform 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans antialiased">
+    <!-- Cursor personalizado -->
+    <div class="custom-cursor fixed w-8 h-8 rounded-full border-2 border-white pointer-events-none transform -translate-x-1/2 -translate-y-1/2 z-50 mix-blend-difference"></div>
+
+    <!-- Barra de navegación -->
+    <nav class="fixed w-full bg-white bg-opacity-90 backdrop-blur-md shadow-sm z-40 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold text-xl">ED</div>
+                <span class="text-xl font-bold text-gray-800">Experiencia Digital</span>
+            </div>
+            
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#inicio" class="text-gray-700 hover:text-purple-600 transition-colors font-medium">Inicio</a>
+                <a href="#servicios" class="text-gray-700 hover:text-purple-600 transition-colors font-medium">Servicios</a>
+                <a href="#galeria" class="text-gray-700 hover:text-purple-600 transition-colors font-medium">Galería</a>
+                <a href="#equipo" class="text-gray-700 hover:text-purple-600 transition-colors font-medium">Equipo</a>
+                <a href="#contacto" class="text-gray-700 hover:text-purple-600 transition-colors font-medium">Contacto</a>
+                <button class="bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition-colors shadow-md">Acceder</button>
+            </div>
+            
+            <button id="mobile-menu-button" class="md:hidden text-gray-700">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+        
+        <!-- Menú móvil -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white w-full px-6 pb-4 shadow-md">
+            <div class="flex flex-col space-y-4">
+                <a href="#inicio" class="text-gray-700 hover:text-purple-600 transition-colors font-medium">Inicio</a>
+                <a href="#servicios" class="text-gray-700 hover:text-purple-600 transition-colors font-medium">Servicios</a>
+                <a href="#galeria" class="text-gray-700 hover:text-purple-600 transition-colors font-medium">Galería</a>
+                <a href="#equipo" class="text-gray-700 hover:text-purple-600 transition-colors font-medium">Equipo</a>
+                <a href="#contacto" class="text-gray-700 hover:text-purple-600 transition-colors font-medium">Contacto</a>
+                <button class="bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition-colors mt-2">Acceder</button>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Sección Hero -->
+    <section id="inicio" class="hero-gradient text-white pt-32 pb-20 md:pt-40 md:pb-32 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 z-10 relative">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-12 md:mb-0">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">Revoluciona tu presencia digital</h1>
+                    <p class="text-lg md:text-xl lg:text-2xl mb-8 opacity-90">Creamos experiencias web inmersivas con diseño innovador y tecnología de vanguardia.</p>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6">
+                        <button class="bg-white text-purple-700 px-8 py-4 rounded-full font-bold hover:bg-opacity-90 transition-all shadow-lg transform hover:scale-105">
+                            Comenzar proyecto
+                        </button>
+                        <button class="border-2 border-white text-white px-8 py-4 rounded-full font-bold hover:bg-white hover:bg-opacity-10 transition-all">
+                            Explorar servicios <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="md:w-1/2 relative">
+                    <div class="floating">
+                        <img src="https://placehold.co/800x600" alt="Interfaz moderna de aplicación web con gráficos 3D e información en tiempo real" class="rounded-xl shadow-2xl w-full">
+                    </div>
+                    <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-yellow-400 rounded-full opacity-20 blur-xl"></div>
+                    <div class="absolute -top-10 -right-10 w-48 h-48 bg-teal-400 rounded-full opacity-20 blur-xl"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="absolute -bottom-1 left-0 right-0 h-24 bg-white transform skew-y-2"></div>
+    </section>
+    
+    <!-- Estadísticas destacadas -->
+    <section class="bg-white py-16 relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="text-4xl md:text-5xl font-bold text-purple-600 mb-2">250+</div>
+                    <div class="text-gray-600">Clientes satisfechos</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl md:text-5xl font-bold text-teal-500 mb-2">500+</div>
+                    <div class="text-gray-600">Proyectos completados</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl md:text-5xl font-bold text-yellow-500 mb-2">99%</div>
+                    <div class="text-gray-600">Tasa de satisfacción</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl md:text-5xl font-bold text-orange-500 mb-2">24/7</div>
+                    <div class="text-gray-600">Soporte continuo</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Sección Servicios -->
+    <section id="servicios" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-purple-600 font-medium uppercase tracking-wider">Nuestros servicios</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mt-4 mb-6">Soluciones digitales completas</h2>
+                <div class="mx-auto max-w-3xl">
+                    <p class="text-gray-600">Ofrecemos un enfoque integral para tu presencia digital, desde diseño web hasta marketing estratégico y desarrollo de aplicaciones personalizadas.</p>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Servicio 1 -->
+                <div class="bg-white rounded-xl p-8 shadow-lg card-hover">
+                    <div class="w-16 h-16 bg-purple-100 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-code text-2xl text-purple-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Desarrollo Web Personalizado</h3>
+                    <p class="text-gray-600 mb-5">Sitios web hechos a medida con las últimas tecnologías, optimizados para rendimiento y escalabilidad.</p>
+                    <a href="#" class="text-purple-600 font-medium flex items-center hover:text-purple-700">
+                        Saber más <i class="fas fa-chevron-right ml-2 text-sm"></i>
+                    </a>
+                </div>
+                
+                <!-- Servicio 2 -->
+                <div class="bg-white rounded-xl p-8 shadow-lg card-hover">
+                    <div class="w-16 h-16 bg-teal-100 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-mobile-alt text-2xl text-teal-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Aplicaciones Móviles</h3>
+                    <p class="text-gray-600 mb-5">Desarrollamos apps nativas e híbridas para iOS y Android con interfaces intuitivas y excelente UX.</p>
+                    <a href="#" class="text-purple-600 font-medium flex items-center hover:text-purple-700">
+                        Saber más <i class="fas fa-chevron-right ml-2 text-sm"></i>
+                    </a>
+                </div>
+                
+                <!-- Servicio 3 -->
+                <div class="bg-white rounded-xl p-8 shadow-lg card-hover">
+                    <div class="w-16 h-16 bg-yellow-100 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-search-dollar text-2xl text-yellow-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Marketing Digital</h3>
+                    <p class="text-gray-600 mb-5">Estrategias SEO, marketing de contenidos y publicidad en redes sociales para hacer crecer tu negocio.</p>
+                    <a href="#" class="text-purple-600 font-medium flex items-center hover:text-purple-700">
+                        Saber más <i class="fas fa-chevron-right ml-2 text-sm"></i>
+                    </a>
+                </div>
+                
+                <!-- Servicio 4 -->
+                <div class="bg-white rounded-xl p-8 shadow-lg card-hover">
+                    <div class="w-16 h-16 bg-pink-100 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-paint-brush text-2xl text-pink-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Diseño UI/UX</h3>
+                    <p class="text-gray-600 mb-5">Interfaces hermosas y funcionales centradas en la experiencia del usuario y la conversión.</p>
+                    <a href="#" class="text-purple-600 font-medium flex items-center hover:text-purple-700">
+                        Saber más <i class="fas fa-chevron-right ml-2 text-sm"></i>
+                    </a>
+                </div>
+                
+                <!-- Servicio 5 -->
+                <div class="bg-white rounded-xl p-8 shadow-lg card-hover">
+                    <div class="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-chart-line text-2xl text-blue-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Analítica de Datos</h3>
+                    <p class="text-gray-600 mb-5">Toma decisiones basadas en datos con nuestros dashboardes personalizados y análisis avanzados.</p>
+                    <a href="#" class="text-purple-600 font-medium flex items-center hover:text-purple-700">
+                        Saber más <i class="fas fa-chevron-right ml-2 text-sm"></i>
+                    </a>
+                </div>
+                
+                <!-- Servicio 6 -->
+                <div class="bg-white rounded-xl p-8 shadow-lg card-hover">
+                    <div class="w-16 h-16 bg-indigo-100 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-headset text-2xl text-indigo-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Soporte Continuo</h3>
+                    <p class="text-gray-600 mb-5">Mantenimiento, actualizaciones y soporte técnico para garantizar el rendimiento óptimo.</p>
+                    <a href="#" class="text-purple-600 font-medium flex items-center hover:text-purple-700">
+                        Saber más <i class="fas fa-chevron-right ml-2 text-sm"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Sección Destacados -->
+    <section class="py-20 bg-white relative overflow-hidden">
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white to-white z-10"></div>
+            <div class="absolute top-0 left-0 w-full h-full flex items-center justify-center opacity-5">
+                <div class="text-purple-600 text-[20vw] font-bold whitespace-nowrap">
+                    EXPERIENCIAS DIGITALES • TECNOLOGÍA INNOVADORA • SOLUCIONES CREATIVAS
+                </div>
+            </div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-6 relative z-20">
+            <div class="flex flex-col lg:flex-row items-center">
+                <div class="lg:w-1/2 mb-12 lg:mb-0">
+                    <img src="https://placehold.co/800x600" alt="Equipo de desarrollo colaborando en un proyecto web con múltiples pantallas mostrando diseños" class="rounded-xl shadow-xl w-full">
+                </div>
+                
+                <div class="lg:w-1/2 lg:pl-16">
+                    <span class="text-purple-600 font-medium uppercase tracking-wider">Sobre nosotros</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mt-4 mb-6">Más que una agencia digital</h2>
+                    <p class="text-gray-600 mb-8">Somos un equipo apasionado de diseñadores, desarrolladores y estrategas digitales comprometidos con crear soluciones que marquen la diferencia. Nuestro enfoque centrado en el cliente garantiza resultados excepcionales.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
+                                    <i class="fas fa-medal text-xl text-purple-600"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-lg font-bold text-gray-800">Certificaciones de calidad</h4>
+                                <p class="text-gray-600 mt-1">Todos nuestros desarrolladores están certificados en las últimas tecnologías.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <div class="w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center">
+                                    <i class="fas fa-hand-holding-heart text-xl text-teal-500"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-lg font-bold text-gray-800">Satisfacción garantizada</h4>
+                                <p class="text-gray-600 mt-1">Nuestra garantía de 30 días asegura que estarás 100% satisfecho.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <div class="w-12 h-12 bg-yellow-100 rounded-xl flex items-center justify-center">
+                                    <i class="fas fa-bolt text-xl text-yellow-500"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-lg font-bold text-gray-800">Entrega rápida</h4>
+                                <p class="text-gray-600 mt-1">Procesos optimizados para entregar resultados en tiempos récord.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Galería de proyectos -->
+    <section id="galeria" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-purple-600 font-medium uppercase tracking-wider">Portafolio</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mt-4 mb-6">Nuestros proyectos destacados</h2>
+                <div class="mx-auto max-w-3xl">
+                    <p class="text-gray-600">Explora algunos de nuestros trabajos recientes que demuestran nuestra creatividad y experiencia técnica.</p>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Proyecto 1 -->
+                <div class="relative group overflow-hidden rounded-xl shadow-lg">
+                    <img src="https://placehold.co/800x600" alt="Dashboard empresarial moderno con gráficos y métricas en tiempo real" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex items-end p-6">
+                        <div>
+                            <span class="text-yellow-400 uppercase text-sm font-medium">Dashboard</span>
+                            <h3 class="text-white text-xl font-bold mt-2">Sistema de analítica</h3>
+                            <button class="mt-4 px-4 py-2 bg-white bg-opacity-20 backdrop-blur-sm rounded-lg text-white hover:bg-opacity-30 transition-colors">
+                                Ver caso de estudio
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Proyecto 2 -->
+                <div class="relative group overflow-hidden rounded-xl shadow-lg">
+                    <img src="https://placehold.co/800x600" alt="Aplicación móvil de finanzas personales con interfaz limpia y visualizaciones claras" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex items-end p-6">
+                        <div>
+                            <span class="text-teal-400 uppercase text-sm font-medium">App móvil</span>
+                            <h3 class="text-white text-xl font-bold mt-2">Gestor financiero</h3>
+                            <button class="mt-4 px-4 py-2 bg-white bg-opacity-20 backdrop-blur-sm rounded-lg text-white hover:bg-opacity-30 transition-colors">
+                                Ver caso de estudio
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Proyecto 3 -->
+                <div class="relative group overflow-hidden rounded-xl shadow-lg">
+                    <img src="https://placehold.co/800x600" alt="Sitio web elegante para una marca de moda con galería de productos interactiva" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex items-end p-6">
+                        <div>
+                            <span class="text-pink-400 uppercase text-sm font-medium">E-Commerce</span>
+                            <h3 class="text-white text-xl font-bold mt-2">Tienda de moda</h3>
+                            <button class="mt-4 px-4 py-2 bg-white bg-opacity-20 backdrop-blur-sm rounded-lg text-white hover:bg-opacity-30 transition-colors">
+                                Ver caso de estudio
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-16">
+                <button class="bg-purple-600 text-white px-10 py-4 rounded-full font-bold hover:bg-purple-700 transition-colors shadow-lg transform hover:scale-105">
+                    Ver todos los proyectos
+                </button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Sección Equipo -->
+    <section id="equipo" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-purple-600 font-medium uppercase tracking-wider">Equipo</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mt-4 mb-6">Conoce a nuestros expertos</h2>
+                <div class="mx-auto max-w-3xl">
+                    <p class="text-gray-600">Nuestro talentoso equipo combina experiencia técnica y creatividad para ofrecer resultados excepcionales.</p>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Miembro 1 -->
+                <div class="bg-white rounded-xl p-6 shadow-lg border border-gray-100 card-hover text-center">
+                    <div class="w-32 h-32 mx-auto rounded-full overflow-hidden mb-6 border-4 border-purple-100">
+                        <img src="https://placehold.co/400x400" alt="Desarrollador web senior sonriente con barba y camisa casual, frente a una pantalla con código" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800">Carlos Martínez</h3>
+                    <p class="text-purple-600 font-medium mb-4">Desarrollador Senior</p>
+                    <p class="text-gray-600 mb-4">Especialista en JavaScript y arquitecturas escalables con más de 10 años de experiencia.</p>
+                    <div class="flex justify-center space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-purple-600"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-purple-600"><i class="fab fa-github"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-purple-600"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Miembro 2 -->
+                <div class="bg-white rounded-xl p-6 shadow-lg border border-gray-100 card-hover text-center">
+                    <div class="w-32 h-32 mx-auto rounded-full overflow-hidden mb-6 border-4 border-teal-100">
+                        <img src="https://placehold.co/400x400" alt="Diseñadora UX/UI profesional con lentes modernos, mirando una paleta de colores en su tableta" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800">Laura González</h3>
+                    <p class="text-purple-600 font-medium mb-4">Diseñadora UX/UI</p>
+                    <p class="text-gray-600 mb-4">Expertise en diseño centrado en el usuario y creación de interfaces intuitivas y hermosas.</p>
+                    <div class="flex justify-center space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-purple-600"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-purple-600"><i class="fab fa-dribbble"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-purple-600"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Miembro 3 -->
+                <div class="bg-white rounded-xl p-6 shadow-lg border border-gray-100 card-hover text-center">
+                    <div class="w-32 h-32 mx-auto rounded-full overflow-hidden mb-6 border-4 border-yellow-100">
+                        <img src="https://placehold.co/400x400" alt="Especialista en marketing digital con laptop analizando métricas de redes sociales" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800">Javier Ruiz</h3>
+                    <p class="text-purple-600 font-medium mb-4">Director de Marketing</p>
+                    <p class="text-gray-600 mb-4">Estratega digital con enfoque en crecimiento orgánico y campañas publicitarias efectivas.</p>
+                    <div class="flex justify-center space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-purple-600"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-purple-600"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-purple-600"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Miembro 4 -->
+                <div class="bg-white rounded-xl p-6 shadow-lg border border-gray-100 card-hover text-center">
+                    <div class="w-32 h-32 mx-auto rounded-full overflow-hidden mb-6 border-4 border-pink-100">
+                        <img src="https://placehold.co/400x400" alt="Desarrolladora frontend joven riendo mientras revisa código en su laptop en una cafetería" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800">Ana Beltrán</h3>
+                    <p class="text-purple-600 font-medium mb-4">Desarrolladora Frontend</p>
+                    <p class="text-gray-600 mb-4">Especialista en React, Vue.js y creación de experiencias web dinámicas y accesibles.</p>
+                    <div class="flex justify-center space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-purple-600"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-purple-600"><i class="fab fa-github"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-purple-600"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-16 text-center">
+                <p class="text-gray-600 mb-6">¿Quieres formar parte de nuestro equipo?</p>
+                <button class="border-2 border-purple-600 text-purple-600 px-8 py-3 rounded-full font-bold hover:bg-purple-600 hover:text-white transition-all">
+                    Ver oportunidades
+                </button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonios -->
+    <section class="py-20 bg-purple-600 text-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-purple-200 font-medium uppercase tracking-wider">Testimonios</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-4 mb-6">Lo que dicen nuestros clientes</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Testimonio 1 -->
+                <div class="bg-white bg-opacity-10 rounded-xl p-8 backdrop-blur-sm">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 rounded-full overflow-hidden mr-4 border-2 border-white">
+                            <img src="https://placehold.co/400x400" alt="Empresario ejecutivo con traje y corbata en su oficina con vista a la ciudad" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Roberto Jiménez</h4>
+                            <p class="text-purple-200 text-sm">CEO, Tecnologías Nova</p>
+                        </div>
+                    </div>
+                    <p class="italic">"El equipo transformó completamente nuestra presencia digital. Su enfoque estratégico y atención al detalle superó todas nuestras expectativas."</p>
+                    <div class="mt-4 flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonio 2 -->
+                <div class="bg-white bg-opacity-10 rounded-xl p-8 backdrop-blur-sm">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 rounded-full overflow-hidden mr-4 border-2 border-white">
+                            <img src="https://placehold.co/400x400" alt="Emprendedora sonriente con tableta en mano, trabajando desde un espacio de coworking moderno" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Sofía Ramírez</h4>
+                            <p class="text-purple-200 text-sm">Fundadora, EcoModa</p>
+                        </div>
+                    </div>
+                    <p class="italic">"Nuestra tienda online ha aumentado sus ventas en un 300% gracias a su trabajo. Combinan perfectamente diseño atractivo con funcionalidad impecable."</p>
+                    <div class="mt-4 flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonio 3 -->
+                <div class="bg-white bg-opacity-10 rounded-xl p-8 backdrop-blur-sm">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 rounded-full overflow-hidden mr-4 border-2 border-white">
+                            <img src="https://placehold.co/400x400" alt="Director de TI con laptop y diagramas de sistemas en una sala de reuniones corporativa" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Miguel Ángel Reyes</h4>
+                            <p class="text-purple-200 text-sm">Director TI, Banco Capital</p>
+                        </div>
+                    </div>
+                    <p class="italic">"El sistema interno que desarrollaron ha optimizado nuestros procesos de manera significativa. Su comprensión de nuestras necesidades fue excepcional."</p>
+                    <div class="mt-4 flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Sección de Contacto -->
+    <section id="contacto" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col lg:flex-row">
+                <div class="lg:w-1/2 mb-12 lg:mb-0 lg:pr-12">
+                    <span class="text-purple-600 font-medium uppercase tracking-wider">Contacto</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mt-4 mb-6">Hablemos de tu proyecto</h2>
+                    <p class="text-gray-600 mb-8">Estamos listos para convertir tus ideas en realidad. Completa el formulario o contáctanos directamente usando la información a continuación.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mt-1">
+                                <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-map-marker-alt text-purple-600"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-lg font-bold text-gray-800">Oficina central</h4>
+                                <p class="text-gray-600 mt-1">Av. Digital 123, Piso 15<br>Ciudad Innovación, CP 45678</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mt-1">
+                                <div class="w-10 h-10 bg-teal-100 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-phone-alt text-teal-500"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-lg font-bold text-gray-800">Teléfono</h4>
+                                <p class="text-gray-600 mt-1">+52 55 1234 5678<br>Lunes a Viernes, 9am - 6pm</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mt-1">
+                                <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-envelope text-blue-500"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-lg font-bold text-gray-800">Correo</h4>
+                                <p class="text-gray-600 mt-1">hola@experienciadigital.com<br>Soporte: soporte@experienciadigital.com</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-12">
+                        <h4 class="text-lg font-bold text-gray-800 mb-4">Síguenos en redes</h4>
+                        <div class="flex space-x-4">
+                            <a href="#" class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-purple-600 hover:text-white transition-colors">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-purple-600 hover:text-white transition-colors">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-purple-600 hover:text-white transition-colors">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-purple-600 hover:text-white transition-colors">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-purple-600 hover:text-white transition-colors">
+                                <i class="fab fa-dribbble"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2">
+                    <form class="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label for="name" class="block text-gray-700 font-medium mb-2">Nombre completo <span class="text-red-500">*</span></label>
+                                <input type="text" id="name" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" required>
+                            </div>
+                            <div>
+                                <label for="email" class="block text-gray-700 font-medium mb-2">Correo electrónico <span class="text-red-500">*</span></label>
+                                <input type="email" id="email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" required>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="subject" class="block text-gray-700 font-medium mb-2">Asunto <span class="text-red-500">*</span></label>
+                            <input type="text" id="subject" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" required>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="message" class="block text-gray-700 font-medium mb-2">Mensaje <span class="text-red-500">*</span></label>
+                            <textarea id="message" rows="5" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" required></textarea>
+                        </div>
+                        
+                        <div class="flex items-center mb-6">
+                            <input type="checkbox" id="privacy" class="w-5 h-5 rounded text-purple-600 focus:ring-purple-600 border-gray-300" required>
+                            <label for="privacy" class="ml-2 text-sm text-gray-600">Acepto la política de privacidad y el tratamiento de mis datos.</label>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-purple-600 text-white px-8 py-4 rounded-full font-bold hover:bg-purple-700 transition-colors shadow-lg transform hover:scale-[1.01]">
+                            Enviar mensaje
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Final -->
+    <section class="py-16 hero-gradient text-white">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">¿Listo para comenzar tu próximo proyecto digital?</h2>
+            <p class="text-xl opacity-90 mb-8 max-w-3xl mx-auto">Transforma tus ideas en una realidad digital impactante con nuestro equipo de expertos.</p>
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+                <button class="bg-white text-purple-700 px-8 py-4 rounded-full font-bold hover:bg-opacity-90 transition-all shadow-lg transform hover:scale-105">
+                    Solicitar cotización
+                </button>
+                <button class="border-2 border-white text-white px-8 py-4 rounded-full font-bold hover:bg-white hover:bg-opacity-10 transition-all">
+                    <i class="fas fa-phone-alt mr-2"></i> Llamar ahora
+                </button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+                <!-- Columna 1 -->
+                <div>
+                    <div class="flex items-center space-x-2 mb-6">
+                        <div class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold text-xl">ED</div>
+                        <span class="text-xl font-bold text-white">Experiencia Digital</span>
+                    </div>
+                    <p class="mb-6">Creamos soluciones digitales innovadoras que impulsan el crecimiento de tu negocio.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-purple-600 hover:text-white transition-colors">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-purple-600 hover:text-white transition-colors">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-purple-600 hover:text-white transition-colors">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-purple-600 hover:text-white transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Columna 2 -->
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-6">Enlaces rápidos</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#inicio" class="hover:text-white transition-colors">Inicio</a></li>
+                        <li><a href="#servicios" class="hover:text-white transition-colors">Servicios</a></li>
+                        <li><a href="#galeria" class="hover:text-white transition-colors">Portafolio</a></li>
+                        <li><a href="#equipo" class="hover:text-white transition-colors">Equipo</a></li>
+                        <li><a href="#contacto" class="hover:text-white transition-colors">Contacto</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Columna 3 -->
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-6">Servicios</h3>
+                    <ul class="space
